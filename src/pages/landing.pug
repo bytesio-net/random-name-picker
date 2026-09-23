@@ -25,26 +25,77 @@ include ../mixins/icons
 
     button#draw-button.solid-button Draw
 
-  #settings.settings
+  #settings.settings(role="dialog" aria-modal="true" aria-labelledby="settings-title")
     #settings-panel.settings__panel
       div.settings__panel__group
-        h1.settings__title Settings
-        div.input-group
-          label.input-label(for="name-list") Name List
-          textarea.input-field.input-field--textarea(rows="8" placeholder="Separate each name by line break" id="name-list")
+        div.settings__heading
+          p.settings__eyebrow Lucky draw controls
+          h1#settings-title.settings__title Settings
+          p.settings__description Build the participant pool, tune what appears on the reel, and optionally choose the next winner.
 
-        div.input-group.input-group--2-column
-          label.input-label(for="remove-from-list") Remove winner from list
-          label.input--switch
-            input(type="checkbox" checked="true" id="remove-from-list")
-            span.slider
+        p#settings-error.input-error(role="alert" aria-live="assertive" hidden)
 
-        div.input-group.input-group--2-column
-          label.input-label(for="enable-sound") Enable sound effect
-          label.input--switch
-            input(type="checkbox" checked="true" id="enable-sound")
-            span.slider
+        section.settings__section(aria-labelledby="participants-title")
+          h2#participants-title.settings__section-title Participants
+          div.input-group
+            label.input-label(for="name-list") Name list
+            textarea.input-field.input-field--textarea(rows="8" placeholder="Separate each name with a line break" id="name-list")
+            p.input-help Names are trimmed and matched exactly, including uppercase and lowercase letters.
+            p#name-list-summary.input-help.input-help--summary(aria-live="polite") 0 draw entries · 0 unique names.
+
+          div.input-group
+            div.input-group--2-column
+              label.input-label(for="remove-duplicate-users") Remove duplicate users
+              label.input--switch
+                input(type="checkbox" id="remove-duplicate-users")
+                span.slider
+            p.input-help When enabled, repeated rows are discarded so every exact name has equal odds.
+
+          div.input-group
+            div.input-group--2-column
+              label.input-label(for="show-duplicate-names") Show repeated names on reel
+              label.input--switch
+                input(type="checkbox" id="show-duplicate-names")
+                span.slider
+            p.input-help Turn this off to render each name only once. Draw odds still use the full saved list.
+
+          div.input-group
+            div.input-group--2-column
+              label.input-label(for="remove-from-list") Remove winner from list
+              label.input--switch
+                input(type="checkbox" id="remove-from-list")
+                span.slider
+            p.input-help Removes one matching entry after a successful draw.
+
+        section.settings__section(aria-labelledby="generator-title")
+          h2#generator-title.settings__section-title Random usernames
+          p.settings__section-description Add unique placeholder users without replacing names already entered.
+          div.input-grid
+            div.input-group.input-group--compact
+              label.input-label(for="random-username-count") Number to add
+              input#random-username-count.input-field(type="number" min="0" max="100" step="1" value="0" inputmode="numeric")
+            div.input-group.input-group--compact
+              label.input-label(for="random-username-prefix") Prefix
+              input#random-username-prefix.input-field(type="text" value="@" placeholder="Optional")
+          p.input-help.input-help--above-action The prefix is added exactly as entered. Leave it empty for names such as user-k7m2qx9c.
+          button#generate-usernames.solid-button.settings__generate-button(type="button") Generate and add
+
+        section.settings__section(aria-labelledby="winner-title")
+          h2#winner-title.settings__section-title Next draw
+          div.input-group.input-group--compact
+            label.input-label(for="winner-name") Set winner name
+            input#winner-name.input-field(type="text" placeholder="Leave blank for a random winner" autocomplete="off" aria-describedby="winner-name-help settings-error")
+            p#winner-name-help.input-help The exact name must be in the saved list. It remains selected for every draw until you clear this field.
+
+        section.settings__section(aria-labelledby="effects-title")
+          h2#effects-title.settings__section-title Effects
+          div.input-group.input-group--compact
+            div.input-group--2-column
+              label.input-label(for="enable-sound") Enable sound effect
+              label.input--switch
+                input(type="checkbox" checked="true" id="enable-sound")
+                span.slider
+
       div.settings__panel__group
         button#settings-save.solid-button.solid-button Save
         button#settings-close.solid-button.solid-button--danger Discard and close
-

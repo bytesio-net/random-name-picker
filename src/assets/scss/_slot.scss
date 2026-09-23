@@ -207,6 +207,71 @@
   color: $color-text-light;
 }
 
+.settings__heading {
+  margin-bottom: 2rem;
+}
+
+.settings__eyebrow {
+  color: $color-yellow;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  margin: 0 0 0.35rem;
+  text-transform: uppercase;
+}
+
+.settings__description,
+.settings__section-description {
+  color: rgba($color-white, 0.78);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.settings__section {
+  background: rgba($color-black, 0.13);
+  border: 1px solid rgba($color-white, 0.14);
+  border-radius: 0.875rem;
+  box-shadow: inset 0 1px 0 rgba($color-white, 0.06);
+  margin-bottom: 1.25rem;
+  padding: 1.5rem;
+
+  .input-group:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.settings__section-title {
+  color: $color-yellow;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  margin: 0 0 1.25rem;
+  text-transform: uppercase;
+}
+
+.settings__section-description {
+  margin: -0.75rem 0 1.25rem;
+}
+
+.settings__generate-button {
+  font-size: 1rem;
+  line-height: 1.25rem;
+  padding: 0.875rem 1rem;
+  width: 100%;
+}
+
+.input-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  margin-bottom: 1rem;
+
+  @media (max-width: 420px) {
+    grid-template-columns: 1fr;
+  }
+}
+
 // Winning effects
 .sunburst {
   position: absolute;
